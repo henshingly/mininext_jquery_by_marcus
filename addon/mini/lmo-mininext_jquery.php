@@ -272,7 +272,7 @@ if (!file_exists($mini_cache_filename)
             $array2 = array();
             $array3 = array();
 
-            $anzahl = 4;
+            $anzahl = 4;  //hier die Anzahl der Spiele einstellen beim öffnen von mininext
 
             $array2 = array_slice ( $archivPaarungen, 0, $anzahl );
             $array3 = array_slice ( $archivPaarungen, $anzahl, count($archivPaarungen) );
