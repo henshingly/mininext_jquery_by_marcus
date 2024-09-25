@@ -22,7 +22,7 @@ require_once(PATH_TO_ADDONDIR . "/classlib/ini.php");
 
 $template_folder = PATH_TO_TEMPLATEDIR . '/mini/';
 
-$mini_standardTemplate = isset($cfgarray['mini']['standardTemplate']) ? $cfgarray['mini']['standardTemplate'] : "mininext.tpl.php";	 // Templatefile
+$mini_standardTemplate = isset($cfgarray['mini']['standardTemplate']) ? $cfgarray['mini']['standardTemplate'] : "mininext.tpl.php";   // Templatefile
 //for security reasons .. will be deleted - so only templates within the template path are possible
 
 $mini_template = isset($_GET['mini_template']) ? str_replace('..', '', $_GET['mini_template']) : (isset($mini_template) ? str_replace('..', '', $mini_template) : $mini_standardTemplate);
@@ -44,7 +44,7 @@ $mini_barWidth = isset($_GET['mini_barWidth']) && is_numeric($_GET['mini_barWidt
 
 $file = isset($_GET['file']) ? $_GET['file'] : (isset($file) ? $file : null);
 
-$archivFolder = isset($_GET['folder']) ? $_GET['folder'] : (isset($folder) ? $folder : basename($ArchivDir)); // Default
+$archivFolder = isset($_GET['folder']) ? $_GET['folder'] : (isset($folder) ? $folder : basename($ArchivDir));  // Default
 
 if (substr($archivFolder,-1) != '/') {
     $archivFolder .= '/';
@@ -54,8 +54,8 @@ if (strpos($archivFolder,'../')!==false) {
     exit();
 }
 
-$a = isset($_GET['a']) ? $_GET['a'] : (isset($a) ? $a : null); // No. of Team 'a' (if not specified, favTeam is used)
-$b = isset($_GET['b']) ? $_GET['b'] : (isset($b) ? $b : null); // No. of Team 'b' (if not specified, next opponent of Team 'a' is used)
+$a = isset($_GET['a']) ? $_GET['a'] : (isset($a) ? $a : null);  // No. of Team 'a' (if not specified, favTeam is used)
+$b = isset($_GET['b']) ? $_GET['b'] : (isset($b) ? $b : null);  // No. of Team 'b' (if not specified, next opponent of Team 'a' is used)
 
 $mini_cache_refresh = isset($mini_cache_refresh) ? $mini_cache_refresh : 0;
 
@@ -65,7 +65,7 @@ $multi = md5($file . $archivFolder . $mini_template . $a . $b);
 // Load the cache-counter-file for viewers simple cache mechanism
 $mini_cache_filename = PATH_TO_LMO . '/' . $diroutput . 'mini_' . $multi . '.txt';
 $mini_cache_counter_filename = PATH_TO_LMO . '/' . $diroutput . 'mini_' . $multi . '_count.txt';
-$mini_cache_counter = 0; //counter for cache hits
+$mini_cache_counter = 0;  //counter for cache hits
 
 if (!file_exists($mini_cache_counter_filename)) {
     touch($mini_cache_counter_filename);
@@ -77,7 +77,7 @@ fclose($mini_cache_counter_file);
 if (!file_exists($mini_cache_filename)
     || filemtime(PATH_TO_LMO . '/' . $dirliga.$file) > filemtime($mini_cache_filename)
     || $mini_cache_counter == 0
-    || $mini_cache_counter > $mini_cache_refresh) { //not cached or cache limit reached -> generate new view
+    || $mini_cache_counter > $mini_cache_refresh) {  //not cached or cache limit reached -> generate new view
 
     //If IFRAME - complete HTML document
     if (basename($_SERVER['PHP_SELF'])=="lmo-mininext_jquery.php") {?>
@@ -94,7 +94,7 @@ if (!file_exists($mini_cache_filename)
 <body><?php
     }
 
-    $template = new HTML_Template_IT($template_folder); // folder
+    $template = new HTML_Template_IT($template_folder);  // folder
     $template -> loadTemplatefile($mini_template);
     $team_a = null;
     $team_b = null;
@@ -113,19 +113,19 @@ if (!file_exists($mini_cache_filename)
 
         if (is_null( $team_b = $liga -> teamForNumber($b)) ) {
             // We determine the nearest opponent of team 'a' if team 'b' is not specified
-            $sortedGames = $liga -> gamesSortedForTeam ($team_a,false); // Only sort by time regardless of game day
+            $sortedGames = $liga -> gamesSortedForTeam ($team_a,false);  // Only sort by time regardless of game day
             $now = time();
             $showLastGame = true;
             foreach ($sortedGames as $game) {
-                if ( $now < $game['partie'] -> zeit ) { // letztes Spiel finden
+                if ( $now < $game['partie'] -> zeit ) {  // letztes Spiel finden
                     $partie = $game['partie'];
-                    $template -> setVariable("gameTxt",$text['mini'][1]); // Es gibt ein zukünftiges Spiel
+                    $template -> setVariable("gameTxt",$text['mini'][1]);  // Es gibt ein zukünftiges Spiel
                     $template -> setVariable("gameNote",$partie -> notiz);
-                    break; // gegner gefunden
+                    break;  // gegner gefunden
                 }
                 $lastPartie = $game['partie'];
             }
-            if (!isset($partie) ) { // No more games found, so show last game (season ended)
+            if (!isset($partie) ) {  // No more games found, so show last game (season ended)
                 $partie = $lastPartie;
                 unset($lastPartie);
                 $showLastGame = false;
@@ -142,7 +142,7 @@ if (!file_exists($mini_cache_filename)
                 $team_b = $partie -> heim;
             }
         }
-        else { // Team 'a' and 'b' were specified so show the result of this game
+        else {  // Team 'a' and 'b' were specified so show the result of this game
             $partie = $liga -> partieForTeams($team_a,$team_b);
             $template -> setVariable("gameTxt",$text['mini'][3]);
         }
@@ -236,13 +236,13 @@ if (!file_exists($mini_cache_filename)
 
                         $teamNames = $newLiga -> teamNames();
                         $newTeam_a = $newLiga -> teamForName($team_a -> name);
-                        $seachNames = $mini_unGreedy == 1 ? findTeamName($teamNames, $team_b -> name) : null; // ungreedy Searching
+                        $seachNames = $mini_unGreedy == 1 ? findTeamName($teamNames, $team_b -> name) : null;  // ungreedy Searching
                         if (isset($seachNames) && count($seachNames) == 1) {
-                            $newTeam_b = $newLiga -> teamForName($seachNames[0]);// Ungreedy Searching was successful
+                            $newTeam_b = $newLiga -> teamForName($seachNames[0]);  // Ungreedy Searching was successful
                             $match = $seachNames[0];
                         }
                         else {
-                            $newTeam_b = $newLiga -> teamForName($team_b -> name);// Searching was too imprecise (more than one result)
+                            $newTeam_b = $newLiga -> teamForName($team_b -> name);  // Searching was too imprecise (more than one result)
                             $match = null;
                         }
                         if (!is_null($newTeam_a) && !is_null($newTeam_b) ){
@@ -262,7 +262,7 @@ if (!file_exists($mini_cache_filename)
                     }
                 }
                 unset($newLiga);
-                // if (count($archivPaarungen) > 10) break; // max number of archive encounters
+                // if (count($archivPaarungen) > 10) break;  // max number of archive encounters
             }
             array_multisort($archivSortDummy,SORT_DESC,$archivPaarungen);
 
@@ -290,7 +290,7 @@ if (!file_exists($mini_cache_filename)
 
             $lostCount = $drawCount = $winCount = 0;
 
-            $template->setCurrentBlock("matches"); // innerer Block mit den Partien
+            $template->setCurrentBlock("matches");  // innerer Block mit den Partien
 
             foreach ($array2 as $paarung) {
                 $template->setVariable("date",$paarung['partie']->datumString());
@@ -337,7 +337,7 @@ if (!file_exists($mini_cache_filename)
                 $template->parseCurrentBlock();
             }
 
-            $template->setCurrentBlock("matches2"); // innerer Block mit den Partien
+            $template->setCurrentBlock("matches2");  // innerer Block mit den Partien
 
             foreach ($array3 as $paarung) {
                 $template->setVariable("date",$paarung['partie']->datumString());
@@ -387,7 +387,7 @@ if (!file_exists($mini_cache_filename)
             // End jQuery Hack
 
 /*
-            $template -> setCurrentBlock("matches"); // innerer Block mit den Partien
+            $template -> setCurrentBlock("matches");  // innerer Block mit den Partien
 
             $lostCount = $drawCount = $winCount = 0;
 
