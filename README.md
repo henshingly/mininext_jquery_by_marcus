@@ -8,5 +8,8 @@ Mit dem Addon mininext ist es möglich, die Statistiken der archivierten Saisons
 
 __marcus__, vom BC Erlbach, hat hier ein kleines Addon gebastelt. Am Anfang werden nur ein paar Spiele angezeigt.  
 (Die Anzahl der voreingestellten Spiele ist schnell geändert - Zeile 275 in der Datei addon/mini/lmo-mininext_jquery.php)  
+```
+$anzahl = 4;  //hier die Anzahl der Spiele einstellen beim öffnen von mininext
+```  
 Durch Anklicken eines Buttons werden dann alle Spiele angezeigt. Dazu wird das Ajax-Framework JQuery verwendet.  
 [Hier mal eine Beispielseite mit beiden Ansichten.](http://lmo8.bplaced.net/history/test.php)
