@@ -7,7 +7,7 @@
 
 Mit dem Addon mininext lassen sich die Statistiken der archivierten Saisons einbinden. Zum kommenden Spiel werden dann die letzten Ergebnisse gegen denselben Gegner angezeigt. Bei vielen Mannschaften kommen pro Saison 2 neue Einträge hinzu, so dass die Liste immer länger wird.
 
-__marcus__ vom BC Erlbach hat dafür ein kleines Addon gebastelt: Zu Beginn werden nur ein paar Spiele aufgelistet, ein Klick auf einen runden Button zeigt alle Spiele an, ein weiterer Klick blendet sie wieder aus.
+Der Autor: Marcus ([BC Erlbach](http://www.bcerlbach.de/)), hat dafür ein kleines Addon gebastelt: Zu Beginn werden nur ein paar Spiele aufgelistet, ein Klick auf einen runden Button zeigt alle Spiele an, ein weiterer Klick blendet sie wieder aus.
 [Hier eine Beispielseite mit beiden Ansichten.](http://lmo8.bplaced.net/history/test.php)
 
 Diese Version ist für **PHP 8** und die aktuelle LMO-Version (lmo_php8) überarbeitet.
