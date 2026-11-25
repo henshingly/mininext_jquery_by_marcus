@@ -1,6 +1,7 @@
 mininext: Archiv-Spiele ein-/ausklappen
 =======================================
-Idee/Erstversion: minitest_jquery (Dietmar). Angepasst für PHP 8 / aktuelle LMO-Version.
+Idee/Erstversion: minitest_jquery (marcus).
+Updates: Angepasst für PHP 8 / aktuelle LMO-Version (henshingly).
 
 Dateien (alle ins LMO-Verzeichnis, Struktur beibehalten):
   addon/mini/lmo-mininext.php          (Funktion eingebaut in die aktuelle PHP-8-Version)
