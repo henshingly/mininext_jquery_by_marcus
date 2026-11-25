@@ -1,0 +1,28 @@
+mininext: Archiv-Spiele ein-/ausklappen
+=======================================
+Idee/Erstversion: minitest_jquery (Dietmar). Angepasst für PHP 8 / aktuelle LMO-Version.
+
+Dateien (alle ins LMO-Verzeichnis, Struktur beibehalten):
+  addon/mini/lmo-mininext.php          (Funktion eingebaut in die aktuelle PHP-8-Version)
+  template/mini/mininext_all.tpl.php   (neues Template, mit Toggle-Zeile und verstecktem Block)
+  img/mehr1.svg mehr2.svg weniger1.svg weniger2.svg (Rund, heller Hintergrund)
+  lang/mini/lang-*.txt                 (neu: 018 = Einblenden-Text, 019 = Ausblenden-Text)
+  minitest.php                         (Beispielseite)
+
+Einstellung "Anzahl zuerst sichtbarer Spiele" (Standard 4), Priorität wie bei den anderen mini_-Werten:
+  1. URL:            ?mini_anzahlSpiele=6
+  2. Variable vor dem include:  $mini_anzahlSpiele = 6;
+  3. Config:         $cfgarray['mini']['anzahlSpiele']
+  4. Standard:       4
+
+Änderungen gegenüber der Erstversion:
+  - Keine doppelte Schleife mehr; ein Durchlauf füllt Block "matches" (erste N) bzw. "matches2" (Rest).
+  - Wird nur gebaut, wenn mehr Spiele als N vorhanden sind (sonst kein Toggle, kein CSS/JS).
+  - Toggle ohne feste IDs -> mehrere mininext-Boxen auf einer Seite funktionieren unabhängig.
+  - jQuery nicht mehr nötig (kleines Vanilla-JS im Template; veraltetes jquery-1.6.2 entfällt).
+  - Bild-URLs über URL_TO_IMGDIR, Texte aus den Sprachdateien, UTF-8.
+  - Cache-Key enthält die Anzahl; Mannschaftsnamen im title-Attribut werden mit htmlspecialchars maskiert.
+  - PSR-12 formatiert (php-cs-fixer), LF, UTF-8.
+
+Zusatz: includes/PEAR.php
+  - get_class() ohne Argument (in PHP 8.3 deprecated) durch __CLASS__ ersetzt (Zeilen 222 und 235), Verhalten identisch.
